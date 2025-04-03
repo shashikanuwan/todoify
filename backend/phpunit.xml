@@ -8,10 +8,14 @@
         <testsuite name="App">
             <directory>tests/App</directory>
         </testsuite>
+        <testsuite name="Domain">
+            <directory>tests/Domain</directory>
+        </testsuite>
     </testsuites>
     <source>
         <include>
             <directory>app</directory>
+            <directory>domain</directory>
         </include>
     </source>
     <php>
