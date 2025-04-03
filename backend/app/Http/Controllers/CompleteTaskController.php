@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\TaskAlreadyCompletedException;
 use App\Http\Requests\CompleteTaskRequest;
 use App\Models\Task;
 use Illuminate\Http\JsonResponse;
@@ -12,6 +13,9 @@ class CompleteTaskController extends Controller
 {
     public function __construct(protected CompleteTask $completeTask) {}
 
+    /**
+     * @throws TaskAlreadyCompletedException
+     */
     public function __invoke(CompleteTaskRequest $request, Task $task): JsonResponse
     {
         $this->completeTask->execute(

@@ -32,4 +32,9 @@ class Task extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function isCompleted(): bool
+    {
+        return $this->completed_at !== null;
+    }
 }
