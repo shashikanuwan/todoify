@@ -10,7 +10,10 @@ it('allows the task owner to mark their task as complete', function () {
     $user = User::factory()->create();
 
     /** @var Task $task */
-    $task = Task::factory()->create(['user_id' => $user->id]);
+    $task = Task::factory()->create([
+        'user_id' => $user->id,
+        'completed_at' => null,
+    ]);
 
     mock(completeTask::class)
         ->shouldReceive('execute');
@@ -28,7 +31,10 @@ it('prevents non-owners from marking a task as complete', function () {
     $otherUser = User::factory()->create();
 
     /** @var Task $task */
-    $task = Task::factory()->create(['user_id' => $otherUser->id]);
+    $task = Task::factory()->create([
+        'user_id' => $otherUser->id,
+        'completed_at' => null,
+    ]);
 
     $response = $this->actingAs($user)
         ->patchJson(route('tasks.complete', $task));
