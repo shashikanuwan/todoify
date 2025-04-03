@@ -49,14 +49,22 @@ jobs:
           cd backend
           php artisan key:generate
 
-      - name: Tests
-        run: backend/vendor/bin/pest --ci
+      - name: Run Tests
+        run: |
+          cd backend
+          ./vendor/bin/pest --ci
 
       - name: Test Coverage
-        run: backend/vendor/bin/pest --coverage
+        run: |
+          cd backend
+          ./vendor/bin/pest --coverage
 
       - name: Type Coverage
-        run: backend/vendor/bin/pest --type-coverage
+        run: |
+          cd backend
+          ./vendor/bin/pest --type-coverage
 
       - name: PHP-CS-Fixer
-        run: backend/vendor/bin/pint
+        run: |
+          cd backend
+          vendor/bin/pint
