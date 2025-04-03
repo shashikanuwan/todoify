@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Task;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,6 +20,7 @@ class TaskFactory extends Factory
             'description' => $this->faker->paragraph,
             'due_date' => $dueDate,
             'completed_at' => $dueDate >= now() ? null : now(),
+            'user_id' => User::factory(),
         ];
     }
 }

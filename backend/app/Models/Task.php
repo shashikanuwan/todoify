@@ -9,19 +9,32 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
+ * @property int $id
  * @property string $title
  * @property string $description
  * @property Carbon $due_date
- * @property int $user_id
  * @property Carbon $completed_at
+ * @property int $user_id
  */
 class Task extends Model
 {
     /** @use HasFactory<TaskFactory> */
     use HasFactory;
 
+    protected function casts(): array
+    {
+        return [
+            'completed_at' => 'datetime:Y-m-d',
+        ];
+    }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function isCompleted(): bool
+    {
+        return $this->completed_at !== null;
     }
 }
