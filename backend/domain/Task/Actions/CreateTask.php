@@ -19,6 +19,7 @@ class CreateTask
         $task->description = $description;
         $task->due_date = $dueDate;
         $task->user()->associate($user);
+        $task->save();
 
         return $task;
     }
