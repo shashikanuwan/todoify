@@ -21,7 +21,7 @@ it('can create task', function () {
     expect($task)->toBeInstanceOf(Task::class)
         ->and($task->title)->toBe('Test Task')
         ->and($task->description)->toBe('Test Description')
-        ->and($task->due_date)->toBe($dueDate)
+        ->and($task->due_date)->toBe($dueDate->format('d M y, h:i A'))
         ->and($task->user_id)->toBe($user->id)
         ->and($task->completed_at)->toBeNull();
 });
