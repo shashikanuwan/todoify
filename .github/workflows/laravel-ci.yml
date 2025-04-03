@@ -50,13 +50,13 @@ jobs:
           php artisan key:generate
 
       - name: Tests
-        run: ./backend/vendor/bin/pest --ci
+        run: backend/vendor/bin/pest --ci
 
       - name: Test Coverage
-        run: ./backend/vendor/bin/pest --coverage
+        run: backend/vendor/bin/pest --coverage
 
       - name: Type Coverage
-        run: ./backend/vendor/bin/pest --type-coverage
+        run: backend/vendor/bin/pest --type-coverage
 
       - name: PHP-CS-Fixer
-        run: ./backend/vendor/bin/pint
+        run: backend/vendor/bin/pint
