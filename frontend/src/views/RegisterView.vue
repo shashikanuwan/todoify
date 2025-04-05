@@ -15,28 +15,28 @@ import PrimaryButton from '@/components/ui/button/PrimaryButton.vue'
         <div class="sm:col-span-2">
           <Label for-id="name"> Name </Label>
           <div class="mt-2.5">
-            <Input type="email" name="name" id="name" />
+            <Input type="email" v-model="form.name" id="name" />
           </div>
         </div>
 
         <div class="sm:col-span-2">
           <Label for-id="email"> Email </Label>
           <div class="mt-2.5">
-            <Input type="email" name="email" id="email" />
+            <Input type="email" v-model="email" id="email" />
           </div>
         </div>
 
         <div class="sm:col-span-2">
           <Label for-id="password"> Password </Label>
           <div class="mt-2.5">
-            <Input name="password" id="password" />
+            <Input v-model="form.password" id="password" />
           </div>
         </div>
 
         <div class="sm:col-span-2">
           <Label for-id="conform_password"> Conform Password </Label>
           <div class="mt-2.5">
-            <Input name="conform_password" id="conform_password" />
+            <Input name="form.conformPassword" id="conform_password" />
           </div>
         </div>
       </div>

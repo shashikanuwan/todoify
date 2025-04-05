@@ -3,10 +3,15 @@
 use App\Http\Controllers\CompleteTaskController;
 use App\Http\Controllers\CreateTaskController;
 use App\Http\Controllers\FetchTaskController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth:sanctum'])
     ->group(function () {
+        Route::get('user', function (Request $request) {
+            return $request->user();
+        });
+
         Route::get('tasks', FetchTaskController::class)
             ->name('tasks.index');
 

@@ -13,6 +13,7 @@ import { RouterLink } from 'vue-router'
       <div class="flex flex-row justify-end space-x-2">
         <RouterLink to="/login">Login</RouterLink>
         <RouterLink to="/register">Register</RouterLink>
+        <RouterLink to="/dashboard">Dashboard</RouterLink>
       </div>
     </div>
   </nav>
