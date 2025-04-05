@@ -16,8 +16,13 @@ const form = ref({
   password: '',
 })
 
+const getToken = async () => {
+  await axios.get('sanctum/csrf-cookie')
+}
+
 const handleLogin = async () => {
-  console.log(form.value)
+  await getToken()
+
   await axios.post('/login', {
     email: form.value.email,
     password: form.value.password,
