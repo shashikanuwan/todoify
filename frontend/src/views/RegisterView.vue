@@ -1,48 +1,74 @@
-<script setup lang="ts">
+<script setup>
+import { ref } from 'vue'
+import axios from 'axios'
+import { useRouter } from 'vue-router'
+
 import Input from '@/components/ui/input/Input.vue'
 import Label from '@/components/ui/label/Label.vue'
 import Card from '@/components/ui/card/Card.vue'
 import CardHeader from '@/components/ui/card/CardHeader.vue'
 import PrimaryButton from '@/components/ui/button/PrimaryButton.vue'
+
+const router = useRouter()
+
+const form = ref({
+  name: '',
+  email: '',
+  password: '',
+  conformPassword: '',
+})
+
+const handleRegister = async () => {
+  console.log(form.value)
+  await axios.post('/register', {
+    name: form.value.name,
+    email: form.value.email,
+    password: form.value.password,
+    password_confirmation: form.value.conformPassword,
+  })
+  await router.push('/login')
+}
 </script>
 
 <template>
   <Card>
     <CardHeader> Register </CardHeader>
 
-    <form class="mx-auto max-w-xl mt-8 sm:mt-12">
-      <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
-        <div class="sm:col-span-2">
-          <Label for-id="name"> Name </Label>
-          <div class="mt-2.5">
-            <Input type="email" v-model="form.name" id="name" />
+    <div class="mx-auto max-w-xl mt-8 sm:mt-12">
+      <form @submit.prevent="handleRegister">
+        <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
+          <div class="sm:col-span-2">
+            <Label for-id="name"> Name </Label>
+            <div class="mt-2.5">
+              <Input type="text" v-model="form.name" id="name" />
+            </div>
           </div>
-        </div>
 
-        <div class="sm:col-span-2">
-          <Label for-id="email"> Email </Label>
-          <div class="mt-2.5">
-            <Input type="email" v-model="email" id="email" />
+          <div class="sm:col-span-2">
+            <Label for-id="email"> Email </Label>
+            <div class="mt-2.5">
+              <Input type="email" v-model="form.email" id="email" />
+            </div>
           </div>
-        </div>
 
-        <div class="sm:col-span-2">
-          <Label for-id="password"> Password </Label>
-          <div class="mt-2.5">
-            <Input v-model="form.password" id="password" />
+          <div class="sm:col-span-2">
+            <Label for-id="password"> Password </Label>
+            <div class="mt-2.5">
+              <Input type="password" v-model="form.password" id="password" />
+            </div>
           </div>
-        </div>
 
-        <div class="sm:col-span-2">
-          <Label for-id="conform_password"> Conform Password </Label>
-          <div class="mt-2.5">
-            <Input name="form.conformPassword" id="conform_password" />
+          <div class="sm:col-span-2">
+            <Label for-id="conform_password"> Conform Password </Label>
+            <div class="mt-2.5">
+              <Input type="password" v-model="form.conformPassword" id="conform_password" />
+            </div>
           </div>
         </div>
-      </div>
-      <div class="mt-10">
-        <PrimaryButton> Register </PrimaryButton>
-      </div>
-    </form>
+        <div class="mt-10">
+          <PrimaryButton> Register </PrimaryButton>
+        </div>
+      </form>
+    </div>
   </Card>
 </template>
