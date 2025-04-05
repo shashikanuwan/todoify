@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Queries\TaskQueryBuilder;
 use Carbon\Carbon;
 use Database\Factories\TaskFactory;
 use Illuminate\Database\Eloquent\Attributes\Scope;
@@ -18,6 +19,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property Carbon $due_date
  * @property Carbon $completed_at
  * @property int $user_id
+ *
+ * @method static TaskQueryBuilder query()
+ * @method static TaskQueryBuilder
  */
 class Task extends Model
 {
@@ -50,20 +54,6 @@ class Task extends Model
         return $query->whereNull('completed_at');
     }
 
-    #[Scope]
-    public function forUser(Builder $query, int $userId): Builder
-    {
-        return $query->whereUserId($userId);
-    }
-
-    #[Scope]
-    public function latestPending(Builder $query): Builder
-    {
-        return $query->orderBy('due_date')
-            ->incomplete()
-            ->limit(5);
-    }
-
     // accessors and mutators
     protected function dueDate(): Attribute
     {
@@ -71,5 +61,10 @@ class Task extends Model
             get: fn (?string $value) => $value ? Carbon::parse($value)
                 ->format('d M y, h:i A') : null,
         );
+    }
+
+    public function newEloquentBuilder($query): Builder
+    {
+        return new TaskQueryBuilder($query);
     }
 }
