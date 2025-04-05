@@ -1,12 +1,11 @@
 <script setup>
-import axios from 'axios'
-import { ref, onMounted } from 'vue'
+import { onMounted } from 'vue'
+import { useAuthStore } from '@/stores/auth.js'
 
-const user = ref()
+const authStore = useAuthStore()
+
 onMounted(async () => {
-  const data = await axios.get('/api/user')
-  user.value = data.data
-  console.log(user.value)
+  await authStore.getUser()
 })
 </script>
 
@@ -14,13 +13,14 @@ onMounted(async () => {
   <div>
     <h1 class="text-lime-500">User Info</h1>
 
-    <div v-if="user" class="text-gray-50">
-      <p>User ID: {{ user.id }}</p>
-      <p>User Name: {{ user.name }}</p>
-      <p>User Email: {{ user.email }}</p>
+    <div v-if="authStore.user" class="text-gray-50">
+      <p>User ID: {{ authStore.user.id }}</p>
+      <p>User Name: {{ authStore.user.name }}</p>
+      <p>User Email: {{ authStore.user.email }}</p>
     </div>
+
     <div v-else>
-      <p>Loading...</p>
+      <p>Please Login</p>
     </div>
   </div>
 </template>
