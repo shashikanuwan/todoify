@@ -1,7 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-import axios from 'axios'
-import { useRouter } from 'vue-router'
+import { useAuthStore } from '@/stores/auth.js'
 
 import Input from '@/components/ui/input/Input.vue'
 import Label from '@/components/ui/label/Label.vue'
@@ -9,7 +8,7 @@ import Card from '@/components/ui/card/Card.vue'
 import CardHeader from '@/components/ui/card/CardHeader.vue'
 import PrimaryButton from '@/components/ui/button/PrimaryButton.vue'
 
-const router = useRouter()
+const authStore = useAuthStore()
 
 const form = ref({
   name: '',
@@ -17,17 +16,6 @@ const form = ref({
   password: '',
   conformPassword: '',
 })
-
-const handleRegister = async () => {
-  console.log(form.value)
-  await axios.post('/register', {
-    name: form.value.name,
-    email: form.value.email,
-    password: form.value.password,
-    password_confirmation: form.value.conformPassword,
-  })
-  await router.push('/login')
-}
 </script>
 
 <template>
@@ -35,7 +23,7 @@ const handleRegister = async () => {
     <CardHeader> Register </CardHeader>
 
     <div class="mx-auto max-w-xl mt-8 sm:mt-12">
-      <form @submit.prevent="handleRegister">
+      <form @submit.prevent="authStore.handleRegister(form)">
         <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
           <div class="sm:col-span-2">
             <Label for-id="name"> Name </Label>
