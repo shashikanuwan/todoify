@@ -79,12 +79,7 @@ export const useAuthStore = defineStore('auth', {
       this.authErrors = []
       await this.getToken()
       try {
-        await axios.post('/reset-password', {
-          email: data.email,
-          password: data.password,
-          password_confirmation: data.conformPassword,
-          token: data.token,
-        })
+        await axios.post('/reset-password', data)
         await this.router.push('/login')
       } catch (error) {
         if (error.response.status === 422) {

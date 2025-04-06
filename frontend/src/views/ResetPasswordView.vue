@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue'
+import { useRoute } from 'vue-router'
 import { useAuthStore } from '@/stores/auth.js'
 
 import Card from '@/components/ui/card/Card.vue'
@@ -9,11 +10,14 @@ import Input from '@/components/ui/input/Input.vue'
 import Label from '@/components/ui/label/Label.vue'
 import FormError from '@/components/ui/error/FormError.vue'
 
+const route = useRoute()
 const authStore = useAuthStore()
 
 const form = ref({
   password: '',
-  confirmPassword: '',
+  password_confirmation: '',
+  email: route.query.email,
+  token: route.params.token,
 })
 </script>
 
@@ -34,7 +38,7 @@ const form = ref({
           <div class="sm:col-span-2">
             <Label for-id="confirmPassword"> Confirm Password </Label>
             <div class="mt-2.5">
-              <Input v-model="form.confirmPassword" id="confirmPassword" type="password" />
+              <Input v-model="form.password_confirmation" id="confirmPassword" type="password" />
             </div>
           </div>
         </div>
