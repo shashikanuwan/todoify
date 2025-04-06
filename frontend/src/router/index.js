@@ -46,13 +46,12 @@ const router = createRouter({
 // Add navigation guard
 router.beforeEach(async (to, from, next) => {
   const authStore = useAuthStore()
-  const isAuthenticated = !!authStore.authUser
 
-  if (to.meta.requiresAuth && !isAuthenticated) {
+  if (to.meta.requiresAuth && !authStore.isAuthenticated) {
     return next({ name: 'login' })
   }
 
-  if (to.meta.guestOnly && isAuthenticated) {
+  if (to.meta.guestOnly && authStore.isAuthenticated) {
     return next({ name: 'dashboard' })
   }
 

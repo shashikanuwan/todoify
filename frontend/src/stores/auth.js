@@ -12,6 +12,7 @@ export const useAuthStore = defineStore('auth', {
     user: (state) => state.authUser,
     errors: (state) => state.authErrors,
     status: (state) => state.authStatus,
+    isAuthenticated: (state) => !!state.authUser,
   },
   actions: {
     async getToken() {
@@ -33,6 +34,7 @@ export const useAuthStore = defineStore('auth', {
           email: data.email,
           password: data.password,
         })
+        await this.getUser()
         await this.router.push('/dashboard')
       } catch (error) {
         if (error.response.status === 422) {
@@ -102,5 +104,8 @@ export const useAuthStore = defineStore('auth', {
       this.authErrors = []
       this.authStatus = null
     },
+  },
+  persist: {
+    paths: ['authUser'],
   },
 })
