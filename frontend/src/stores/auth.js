@@ -93,5 +93,9 @@ export const useAuthStore = defineStore('auth', {
         }
       }
     },
+    async clearMessages() {
+      this.authErrors = []
+      this.authStatus = null
+    },
   },
 })
