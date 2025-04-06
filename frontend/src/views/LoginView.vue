@@ -38,7 +38,7 @@ const form = ref({
           </div>
         </div>
         <div class="mt-10">
-          <PrimaryButton> Login </PrimaryButton>
+          <PrimaryButton type="submit"> Login </PrimaryButton>
         </div>
       </form>
     </div>
