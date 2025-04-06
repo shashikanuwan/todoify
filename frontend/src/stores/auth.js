@@ -40,5 +40,20 @@ export const useAuthStore = defineStore('auth', {
       this.authUser = null
       await this.router.push('/')
     },
+    async handleForgotPassword(email) {
+      await axios.post('/forgot-password', {
+        email: email,
+      })
+    },
+    async handleResetPassword(data) {
+      await this.getToken()
+      await axios.post('/reset-password', {
+        email: data.email,
+        password: data.password,
+        password_confirmation: data.conformPassword,
+        token: data.token,
+      })
+      await this.router.push('/login')
+    },
   },
 })
