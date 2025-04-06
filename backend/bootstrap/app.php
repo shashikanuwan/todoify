@@ -21,15 +21,14 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'verified' => \App\Http\Middleware\EnsureEmailIsVerified::class,
         ]);
-
-        //
+        $middleware->statefulApi();
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        $exceptions->render(function (NotFoundHttpException $e, Request $request) {
-            if ($request->is('api/*')) {
-                return response()->json([
-                    'message' => 'Record not found.',
-                ], 404);
-            }
-        });
+        //        $exceptions->render(function (NotFoundHttpException $e, Request $request) {
+        //            if ($request->is('api/*')) {
+        //                return response()->json([
+        //                    'message' => 'Record not found.',
+        //                ], 404);
+        //            }
+        //        });
     })->create();

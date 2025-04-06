@@ -1,5 +1,9 @@
 <script setup>
 import { RouterLink } from 'vue-router'
+import { useAuthStore } from '@/stores/auth.js'
+import PrimaryButton from '@/components/ui/button/PrimaryButton.vue'
+
+const authStore = useAuthStore()
 </script>
 
 <template>
@@ -10,9 +14,16 @@ import { RouterLink } from 'vue-router'
           <h1 class="text-2xl font-bold">Todoify</h1>
         </RouterLink>
       </div>
-      <div class="flex flex-row justify-end space-x-2">
-        <RouterLink to="/login">Login</RouterLink>
-        <RouterLink to="/register">Register</RouterLink>
+      <div class="flex flex-row justify-end items-center space-x-2">
+        <template v-if="!authStore.user">
+          <RouterLink to="login">Login</RouterLink>
+          <RouterLink to="register">Register</RouterLink>
+        </template>
+
+        <template v-else>
+          <RouterLink to="dashboard">Dashboard</RouterLink>
+          <PrimaryButton @click="authStore.handleLogout">Logout</PrimaryButton>
+        </template>
       </div>
     </div>
   </nav>
