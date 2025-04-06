@@ -6,6 +6,7 @@ export const useAuthStore = defineStore('auth', {
     authUser: null,
     authErrors: [],
     authStatus: null,
+    tokenFetched: false,
   }),
   getters: {
     user: (state) => state.authUser,
@@ -14,7 +15,10 @@ export const useAuthStore = defineStore('auth', {
   },
   actions: {
     async getToken() {
-      await axios.get('/sanctum/csrf-cookie')
+      if (!this.tokenFetched) {
+        await axios.get('/sanctum/csrf-cookie')
+        this.tokenFetched = true
+      }
     },
     async getUser() {
       await this.getToken()
@@ -60,6 +64,7 @@ export const useAuthStore = defineStore('auth', {
     async handleLogout() {
       await axios.post('/logout')
       this.authUser = null
+      this.tokenFetched = false
       await this.router.push('/')
     },
     async handleForgotPassword(email) {
