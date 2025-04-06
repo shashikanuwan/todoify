@@ -23,7 +23,7 @@ const form = ref({
   <Card>
     <CardHeader> Register </CardHeader>
 
-    <div class="mx-auto max-w-xl mt-8 sm:mt-12">
+    <div class="mx-auto max-w-xl mt-8 sm:mt-10">
       <form @submit.prevent="authStore.handleRegister(form)">
         <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
           <div class="sm:col-span-2">

@@ -8,6 +8,7 @@ import Card from '@/components/ui/card/Card.vue'
 import CardHeader from '@/components/ui/card/CardHeader.vue'
 import PrimaryButton from '@/components/ui/button/PrimaryButton.vue'
 import FormError from '@/components/ui/error/FormError.vue'
+import SuccessAlert from '@/components/ui/alert/SuccessAlert.vue'
 
 const authStore = useAuthStore()
 
@@ -20,8 +21,9 @@ const form = ref({
 <template>
   <Card>
     <CardHeader> Login </CardHeader>
+    <SuccessAlert v-if="authStore.status" :message="authStore.status" />
 
-    <div class="mx-auto max-w-xl mt-8 sm:mt-12">
+    <div class="mx-auto max-w-xl mt-8 sm:mt-10">
       <form @submit.prevent="authStore.handleLogin(form)">
         <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
           <div class="sm:col-span-2">

@@ -8,15 +8,18 @@ import Input from '@/components/ui/input/Input.vue'
 import Label from '@/components/ui/label/Label.vue'
 import PrimaryButton from '@/components/ui/button/PrimaryButton.vue'
 import FormError from '@/components/ui/error/FormError.vue'
+import SuccessAlert from '@/components/ui/alert/SuccessAlert.vue'
 
 const authStore = useAuthStore()
-const email = ref()
+const email = ref('')
 </script>
 
 <template>
   <Card>
     <CardHeader> Forgot Password </CardHeader>
-    <div class="mx-auto max-w-xl mt-8 sm:mt-12">
+    <SuccessAlert v-if="authStore.status" :message="authStore.status" />
+
+    <div class="mx-auto max-w-xl mt-8 sm:mt-10">
       <form @submit.prevent="authStore.handleForgotPassword(email)">
         <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
           <div class="sm:col-span-2">

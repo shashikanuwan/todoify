@@ -24,7 +24,8 @@ const form = ref({
 <template>
   <Card>
     <CardHeader> Password Reset </CardHeader>
-    <div class="mx-auto max-w-xl mt-8 sm:mt-12">
+
+    <div class="mx-auto max-w-xl mt-8 sm:mt-10">
       <form @submit.prevent="authStore.handleResetPassword(form)">
         <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
           <div class="sm:col-span-2">
@@ -32,6 +33,7 @@ const form = ref({
             <div class="mt-2.5">
               <Input v-model="form.password" id="password" type="password" />
               <FormError :error="authStore.errors.password" />
+              <FormError :error="authStore.errors.email" />
             </div>
           </div>
 
