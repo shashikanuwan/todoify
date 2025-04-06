@@ -7,6 +7,7 @@ import Label from '@/components/ui/label/Label.vue'
 import Card from '@/components/ui/card/Card.vue'
 import CardHeader from '@/components/ui/card/CardHeader.vue'
 import PrimaryButton from '@/components/ui/button/PrimaryButton.vue'
+import FormError from '@/components/ui/error/FormError.vue'
 
 const authStore = useAuthStore()
 
@@ -27,6 +28,7 @@ const form = ref({
             <Label for-id="email"> Email </Label>
             <div class="mt-2.5">
               <Input v-model="form.email" id="email" type="email" />
+              <FormError :error="authStore.errors.email" />
             </div>
           </div>
 
@@ -34,6 +36,7 @@ const form = ref({
             <Label for-id="password"> Password </Label>
             <div class="mt-2.5">
               <Input v-model="form.password" id="password" type="password" />
+              <FormError :error="authStore.errors.password" />
             </div>
           </div>
         </div>

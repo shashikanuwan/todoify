@@ -7,6 +7,7 @@ import CardHeader from '@/components/ui/card/CardHeader.vue'
 import PrimaryButton from '@/components/ui/button/PrimaryButton.vue'
 import Input from '@/components/ui/input/Input.vue'
 import Label from '@/components/ui/label/Label.vue'
+import FormError from '@/components/ui/error/FormError.vue'
 
 const authStore = useAuthStore()
 
@@ -26,6 +27,7 @@ const form = ref({
             <Label for-id="password"> New Password </Label>
             <div class="mt-2.5">
               <Input v-model="form.password" id="password" type="password" />
+              <FormError :error="authStore.errors.password" />
             </div>
           </div>
 

@@ -4,9 +4,11 @@ import axios from 'axios'
 export const useAuthStore = defineStore('auth', {
   state: () => ({
     authUser: null,
+    authErrors: [],
   }),
   getters: {
     user: (state) => state.authUser,
+    errors: (state) => state.authErrors,
   },
   actions: {
     async getToken() {
@@ -18,22 +20,40 @@ export const useAuthStore = defineStore('auth', {
       this.authUser = data.data
     },
     async handleLogin(data) {
+      this.authErrors = []
       await this.getToken()
-      await axios.post('/login', {
-        email: data.email,
-        password: data.password,
-      })
-      await this.router.push('/dashboard')
+      try {
+        await axios.post('/login', {
+          email: data.email,
+          password: data.password,
+        })
+        await this.router.push('/dashboard')
+      } catch (error) {
+        if (error.response.status === 422) {
+          this.authErrors = error.response.data.errors
+        } else {
+          this.authErrors = ['Invalid credentials']
+        }
+      }
     },
     async handleRegister(data) {
+      this.authErrors = []
       await this.getToken()
-      await axios.post('/register', {
-        name: data.name,
-        email: data.email,
-        password: data.password,
-        password_confirmation: data.conformPassword,
-      })
-      await this.router.push('/dashboard')
+      try {
+        await axios.post('/register', {
+          name: data.name,
+          email: data.email,
+          password: data.password,
+          password_confirmation: data.conformPassword,
+        })
+        await this.router.push('/dashboard')
+      } catch (error) {
+        if (error.response.status === 422) {
+          this.authErrors = error.response.data.errors
+        } else {
+          this.authErrors = ['Invalid credentials']
+        }
+      }
     },
     async handleLogout() {
       await axios.post('/logout')
@@ -41,19 +61,38 @@ export const useAuthStore = defineStore('auth', {
       await this.router.push('/')
     },
     async handleForgotPassword(email) {
-      await axios.post('/forgot-password', {
-        email: email,
-      })
+      this.authErrors = []
+      await this.getToken()
+      try {
+        await axios.post('/forgot-password', {
+          email: email,
+        })
+      } catch (error) {
+        if (error.response.status === 422) {
+          this.authErrors = error.response.data.errors
+        } else {
+          this.authErrors = ['Invalid credentials']
+        }
+      }
     },
     async handleResetPassword(data) {
+      this.authErrors = []
       await this.getToken()
-      await axios.post('/reset-password', {
-        email: data.email,
-        password: data.password,
-        password_confirmation: data.conformPassword,
-        token: data.token,
-      })
-      await this.router.push('/login')
+      try {
+        await axios.post('/reset-password', {
+          email: data.email,
+          password: data.password,
+          password_confirmation: data.conformPassword,
+          token: data.token,
+        })
+        await this.router.push('/login')
+      } catch (error) {
+        if (error.response.status === 422) {
+          this.authErrors = error.response.data.errors
+        } else {
+          this.authErrors = ['Invalid credentials']
+        }
+      }
     },
   },
 })
