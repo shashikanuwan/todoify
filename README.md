@@ -53,6 +53,10 @@ A clean and modular full-stack Todo application built using **Laravel**, **Vue.j
     ```bash
     ./vendor/bin/pest --type-coverage
     ```
+### 📂 Screenshots
+
+Screenshots of the application in different views (mobile, desktop) are located in the [Google Drive](https://drive.google.com/drive/folders/1HHcvMzhpnXUN0TMvHSN7wnENRYT4tQ-_?usp=drive_link).
+
 ### 📜 License
 This project is licensed under the MIT License.
 
