@@ -1,16 +1,37 @@
 <script setup>
 import { useTaskStore } from '@/stores/task.js'
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import PrimaryButton from '@/components/ui/button/PrimaryButton.vue'
+import ConfirmDialog from '@/components/ui/alert/ConfirmDialog.vue'
 
 const taskStore = useTaskStore()
+const showConfirm = ref(false)
+const selectedTaskId = ref(null)
 
 onMounted(() => {
   taskStore.fetchTasks()
 })
+
+const askToCompleteTask = (taskId) => {
+  selectedTaskId.value = taskId
+  showConfirm.value = true
+}
+
+const confirmCompleteTask = async () => {
+  await taskStore.completeTask(selectedTaskId.value)
+  showConfirm.value = false
+  selectedTaskId.value = null
+}
 </script>
 
 <template>
+  <ConfirmDialog
+    :show="showConfirm"
+    message="Are you sure you want to mark this task as done?"
+    @confirm="confirmCompleteTask"
+    @cancel="showConfirm = false"
+  />
+
   <div class="max-h-[500px] overflow-y-auto space-y-4">
     <div v-for="task in taskStore.tasks" :key="task.id">
       <div class="bg-gray-200 dark:bg-gray-700 p-4 rounded-md shadow">
@@ -24,7 +45,7 @@ onMounted(() => {
             <p class="mt-2 text-sm text-gray-600 dark:text-gray-300">{{ task.description }}</p>
           </div>
           <div class="justify-self-end">
-            <PrimaryButton @click="taskStore.completeTask(task.id)">Done</PrimaryButton>
+            <PrimaryButton @click="askToCompleteTask(task.id)">Done</PrimaryButton>
           </div>
         </div>
       </div>
