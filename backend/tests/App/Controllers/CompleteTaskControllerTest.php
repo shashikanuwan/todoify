@@ -22,7 +22,7 @@ it('allows the task owner to mark their task as complete', function () {
         ->patchJson(route('tasks.complete', $task));
 
     $response->assertStatus(Response::HTTP_OK)
-        ->assertJson(['message' => 'Task completed successfully']);
+        ->assertJson(['status' => 'Task completed successfully']);
 });
 
 it('prevents non-owners from marking a task as complete', function () {

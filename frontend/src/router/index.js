@@ -14,13 +14,13 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       component: () => import('@/views/LoginView.vue'),
-      meta: { guestOnly: true },
+      meta: { requiresGuest: true },
     },
     {
       path: '/register',
       name: 'register',
       component: () => import('@/views/RegisterView.vue'),
-      meta: { guestOnly: true },
+      meta: { requiresGuest: true },
     },
     {
       path: '/dashboard',
@@ -32,13 +32,13 @@ const router = createRouter({
       path: '/forgot-password',
       name: 'forgot-password',
       component: () => import('@/views/ForgotPasswordView.vue'),
-      meta: { guestOnly: true },
+      meta: { requiresGuest: true },
     },
     {
       path: '/password-reset/:token',
       name: 'password-reset',
       component: () => import('@/views/ResetPasswordView.vue'),
-      meta: { guestOnly: true },
+      meta: { requiresGuest: true },
     },
   ],
 })
@@ -51,7 +51,7 @@ router.beforeEach(async (to, from, next) => {
     return next({ name: 'login' })
   }
 
-  if (to.meta.guestOnly && authStore.isAuthenticated) {
+  if (to.meta.requiresGuest && authStore.isAuthenticated) {
     return next({ name: 'dashboard' })
   }
 

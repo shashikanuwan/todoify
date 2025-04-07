@@ -22,6 +22,10 @@ defineProps({
     type: String,
     default: '',
   },
+  required: {
+    type: Boolean,
+    default: true,
+  },
 })
 
 const emit = defineEmits(['update:modelValue'])
@@ -37,5 +41,6 @@ const emit = defineEmits(['update:modelValue'])
     v-bind="$attrs"
     :autocomplete="autocomplete"
     :placeholder="placeholder"
+    :required="required"
   />
 </template>

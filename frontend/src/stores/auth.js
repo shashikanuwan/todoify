@@ -6,25 +6,22 @@ export const useAuthStore = defineStore('auth', {
     authUser: null,
     authErrors: [],
     authStatus: null,
-    tokenFetched: false,
+    isLoggedIn: false,
   }),
   getters: {
     user: (state) => state.authUser,
     errors: (state) => state.authErrors,
     status: (state) => state.authStatus,
-    isAuthenticated: (state) => !!state.authUser,
+    isAuthenticated: (state) => state.isLoggedIn,
   },
   actions: {
     async getToken() {
-      if (!this.tokenFetched) {
-        await axios.get('/sanctum/csrf-cookie')
-        this.tokenFetched = true
-      }
+      await axios.get('/sanctum/csrf-cookie')
     },
     async getUser() {
-      await this.getToken()
       const data = await axios.get('/api/user')
       this.authUser = data.data
+      this.isLoggedIn = true
     },
     async handleLogin(data) {
       this.authErrors = []
@@ -54,6 +51,7 @@ export const useAuthStore = defineStore('auth', {
           password: data.password,
           password_confirmation: data.conformPassword,
         })
+        await this.getUser()
         await this.router.push('/dashboard')
       } catch (error) {
         if (error.response.status === 422) {
@@ -66,7 +64,7 @@ export const useAuthStore = defineStore('auth', {
     async handleLogout() {
       await axios.post('/logout')
       this.authUser = null
-      this.tokenFetched = false
+      this.isLoggedIn = false
       await this.router.push('/')
     },
     async handleForgotPassword(email) {
@@ -106,6 +104,7 @@ export const useAuthStore = defineStore('auth', {
     },
   },
   persist: {
-    paths: ['authUser'],
+    storage: sessionStorage,
+    pick: ['authUser', 'isLoggedIn'],
   },
 })

@@ -15,7 +15,7 @@ const authStore = useAuthStore()
         </RouterLink>
       </div>
       <div class="flex flex-row justify-end items-center space-x-2">
-        <template v-if="!authStore.user">
+        <template v-if="!authStore.isAuthenticated">
           <RouterLink to="login">Login</RouterLink>
           <RouterLink to="register">Register</RouterLink>
         </template>

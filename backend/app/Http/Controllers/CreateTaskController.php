@@ -22,7 +22,7 @@ class CreateTaskController extends Controller
         );
 
         return response()->json(
-            ['message' => 'Task created successfully'],
+            ['status' => 'Task created successfully'],
             Response::HTTP_CREATED
         );
     }
