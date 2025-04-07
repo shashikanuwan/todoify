@@ -95,5 +95,5 @@ it('can create a new task', function () {
         ]);
 
     $response->assertStatus(Response::HTTP_CREATED);
-    $response->assertJson(['message' => 'Task created successfully']);
+    $response->assertJson(['status' => 'Task created successfully']);
 });

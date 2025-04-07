@@ -24,7 +24,7 @@ class CompleteTaskController extends Controller
         );
 
         return response()->json(
-            ['message' => 'Task completed successfully'],
+            ['status' => 'Task completed successfully'],
             Response::HTTP_OK
         );
     }

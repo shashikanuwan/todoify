@@ -13,14 +13,14 @@ const router = createRouter({
     {
       path: '/login',
       name: 'login',
-      component: () => import('@/views/LoginView.vue'),
-      meta: { guestOnly: true },
+      component: () => import('@/views/auth/LoginView.vue'),
+      meta: { requiresGuest: true },
     },
     {
       path: '/register',
       name: 'register',
-      component: () => import('@/views/RegisterView.vue'),
-      meta: { guestOnly: true },
+      component: () => import('@/views/auth/RegisterView.vue'),
+      meta: { requiresGuest: true },
     },
     {
       path: '/dashboard',
@@ -31,14 +31,24 @@ const router = createRouter({
     {
       path: '/forgot-password',
       name: 'forgot-password',
-      component: () => import('@/views/ForgotPasswordView.vue'),
-      meta: { guestOnly: true },
+      component: () => import('@/views/auth/ForgotPasswordView.vue'),
+      meta: { requiresGuest: true },
     },
     {
       path: '/password-reset/:token',
       name: 'password-reset',
-      component: () => import('@/views/ResetPasswordView.vue'),
-      meta: { guestOnly: true },
+      component: () => import('@/views/auth/ResetPasswordView.vue'),
+      meta: { requiresGuest: true },
+    },
+    {
+      path: '/404',
+      name: '404',
+      component: () => import('@/views/error/404.vue'),
+    },
+    {
+      path: '/500',
+      name: '500',
+      component: () => import('@/views/error/500.vue'),
     },
   ],
 })
@@ -51,7 +61,7 @@ router.beforeEach(async (to, from, next) => {
     return next({ name: 'login' })
   }
 
-  if (to.meta.guestOnly && authStore.isAuthenticated) {
+  if (to.meta.requiresGuest && authStore.isAuthenticated) {
     return next({ name: 'dashboard' })
   }
 
