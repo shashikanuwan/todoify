@@ -102,6 +102,10 @@ export const useAuthStore = defineStore('auth', {
       this.authErrors = []
       this.authStatus = null
     },
+    async cleanState() {
+      this.authUser = null
+      this.isLoggedIn = false
+    },
   },
   persist: {
     storage: sessionStorage,

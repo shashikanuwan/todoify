@@ -40,6 +40,16 @@ const router = createRouter({
       component: () => import('@/views/ResetPasswordView.vue'),
       meta: { requiresGuest: true },
     },
+    {
+      path: '/404',
+      name: '404',
+      component: () => import('@/views/error/404.vue'),
+    },
+    {
+      path: '/500',
+      name: '500',
+      component: () => import('@/views/error/500.vue'),
+    },
   ],
 })
 
