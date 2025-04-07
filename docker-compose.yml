@@ -10,7 +10,8 @@ services:
     networks:
       - app-network
     environment:
-      - DB_HOST=mysql
+      - DB_CONNECTION=mysql
+      - DB_HOST=mysql-db
       - DB_PORT=3306
       - DB_DATABASE=todoify_db
       - DB_USERNAME=root

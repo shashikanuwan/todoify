@@ -1,37 +1,33 @@
-FROM php:8.2-fpm
+FROM php:8.3-fpm
 
 # Install system dependencies
-RUN apt-get update && apt-get install -y libpng-dev libjpeg-dev libfreetype6-dev zip git libxml2-dev libssl-dev
+RUN apt-get update && apt-get install -y \
+    libpng-dev libjpeg-dev libfreetype6-dev zip git \
+    libxml2-dev libssl-dev unzip curl \
+    default-mysql-client
 
-# Install PHP extensions
-RUN docker-php-ext-configure gd --with-freetype --with-jpeg
-RUN docker-php-ext-install gd pdo pdo_mysql bcmath xml
+# PHP extensions
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install gd pdo pdo_mysql bcmath xml
 
-# Install Composer (PHP package manager)
+# Composer
 COPY --from=composer:2.6 /usr/bin/composer /usr/bin/composer
 
-# Set working directory
+# Workdir
 WORKDIR /var/www
 
-# Copy Laravel project files into the container
+# Copy app
 COPY backend/ .
 
-# Install Laravel dependencies
-RUN composer install
+# Composer install
+RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 
-# Set up the environment
-RUN cp .env.example .env
-RUN php artisan key:generate
-
-# ADD THIS
+# Copy entrypoint
 COPY backend/docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
-
-# Expose the container port
+# Expose port
 EXPOSE 8000
 
-# Start PHP-FPM (do not use php artisan serve in production)
-CMD ["php-fpm"]
-
-CMD ["docker-entrypoint.sh"]
+# Run entrypoint
+ENTRYPOINT ["docker-entrypoint.sh"]

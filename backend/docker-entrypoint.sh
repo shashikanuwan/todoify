@@ -1,16 +1,16 @@
 #!/bin/bash
 
-# Wait until MySQL is ready
-echo "Waiting for MySQL to be ready..."
-until php -r "new PDO('mysql:host=${DB_HOST};port=${DB_PORT};dbname=${DB_DATABASE}', '${DB_USERNAME}', '${DB_PASSWORD}');" > /dev/null 2>&1; do
+# Wait for MySQL to be ready
+echo "⏳ Waiting for MySQL to be ready at $DB_HOST:$DB_PORT..."
+until mysql -h"$DB_HOST" -P"$DB_PORT" -u"$DB_USERNAME" -p"$DB_PASSWORD" -e "SHOW DATABASES;" > /dev/null 2>&1; do
   sleep 2
-  echo "Waiting for MySQL..."
+  echo "❗ Still waiting for MySQL..."
 done
 
-echo "MySQL is ready!"
+echo "✅ MySQL is ready!"
 
-# Run migrations and seed
-php artisan migrate:fresh --seed
+# Run migrations and seeds
+php artisan migrate --force
 
-# Start PHP-FPM
-exec php-fpm
+# Start Laravel dev server
+php artisan serve --host=0.0.0.0 --port=8000
