@@ -6,7 +6,7 @@ A clean and modular full-stack Todo application built using **Laravel**, **Vue.j
 
 ## 🧩 Tech Stack
 
-- **Backend:** Laravel 12 (PHP 8.3)
+- **Backend:** Laravel 12 (PHP ^8.2)
 - **Frontend:** Vue 3 (SPA)
 - **Database:** MySQL
 - **Containerization:** Docker + Docker Compose
