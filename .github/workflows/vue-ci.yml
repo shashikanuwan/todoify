@@ -13,11 +13,6 @@ jobs:
       - name: 🚚 Checkout
         uses: actions/checkout@v4
 
-      - name: Copy .env
-        run: |
-          cd backend
-          php -r "file_exists('.env') || copy('.env.example', '.env');"
-
       - name: Install Dependencies
         run: |
           cd frontend
