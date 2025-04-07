@@ -13,7 +13,7 @@ RUN npm install
 RUN npm run build
 
 # Expose the container port (adjust port if needed)
-EXPOSE 8080
+EXPOSE 3000
 
 # Start the Vue.js application
-CMD ["npm", "run", "serve"]
+CMD ["npm", "run", "dev"]

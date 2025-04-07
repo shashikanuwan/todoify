@@ -19,8 +19,19 @@ COPY backend/ .
 # Install Laravel dependencies
 RUN composer install
 
+# Set up the environment
+RUN cp .env.example .env
+RUN php artisan key:generate
+
+# ADD THIS
+COPY backend/docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
+
 # Expose the container port
 EXPOSE 8000
 
-# Start PHP-FPM
+# Start PHP-FPM (do not use php artisan serve in production)
 CMD ["php-fpm"]
+
+CMD ["docker-entrypoint.sh"]
