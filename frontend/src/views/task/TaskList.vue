@@ -50,5 +50,9 @@ const confirmCompleteTask = async () => {
         </div>
       </div>
     </div>
+
+    <div v-if="!taskStore.tasks.length">
+      <p class="text-gray-500 text-center">🎉 You have no pending tasks. Enjoy your day!</p>
+    </div>
   </div>
 </template>

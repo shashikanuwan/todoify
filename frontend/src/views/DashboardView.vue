@@ -16,7 +16,10 @@ onMounted(() => {
 <template>
   <div class="text-center text-lg mt-8 font-bold">
     <div v-if="authStore.user" class="text-gray-700 dark:text-gray-300">
-      <p>Hi {{ authStore.user.name }}</p>
+      <p>Welcome back, {{ authStore.user.name }} 👋</p>
+      <p class="text-sm font-normal mt-1 text-gray-500 dark:text-gray-400">
+        Ready to tackle your tasks for today?
+      </p>
     </div>
   </div>
 
