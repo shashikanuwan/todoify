@@ -10,7 +10,7 @@ done
 echo "✅ MySQL is ready!"
 
 # Run migrations and seeds
-php artisan migrate --force
+php artisan migrate:fresh --seed
 
 # Start Laravel dev server
 php artisan serve --host=0.0.0.0 --port=8000
