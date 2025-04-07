@@ -1,0 +1,61 @@
+services:
+  # Laravel API (Backend)
+  laravel:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: laravel-api
+    image: laravel-api:latest
+    volumes:
+      - ./backend:/var/www  # Volume to mount the backend directory
+    networks:
+      - backend-network
+    environment:
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_DATABASE=todoify_db
+      - DB_USERNAME=root
+      - DB_PASSWORD=root
+    ports:
+      - "9000:9000"
+    depends_on:
+      - mysql
+
+  # Vue.js Frontend
+  vue:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    container_name: vue-frontend
+    image: vue-frontend:latest
+    volumes:
+      - ./frontend:/app  # Mount the frontend directory
+    networks:
+      - frontend-network
+    ports:
+      - "8080:8080"
+    depends_on:
+      - laravel
+
+  # MySQL Database
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: todoify_db
+    networks:
+      - backend-network
+    volumes:
+      - mysql-data:/var/lib/mysql
+    ports:
+      - "3307:3306"
+
+networks:
+  backend-network:
+    driver: bridge
+  frontend-network:
+    driver: bridge
+
+volumes:
+  mysql-data:
