@@ -23,6 +23,9 @@ export const useTaskStore = defineStore('task', {
         })
         this.taskStatus = response.data.status
         await this.fetchTasks()
+        setTimeout(() => {
+          this.taskStatus = null
+        }, 4000)
       } catch (error) {
         if (error.response.status === 422) {
           this.taskErrors = error.response.data.errors

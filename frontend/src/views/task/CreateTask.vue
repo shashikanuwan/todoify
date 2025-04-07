@@ -16,6 +16,19 @@ const form = ref({
   due_date: '',
 })
 
+const clearForm = () => {
+  form.value.title = ''
+  form.value.description = ''
+  form.value.due_date = ''
+}
+
+const handleTaskCreation = async () => {
+  await taskStore.createTask(form.value)
+  if (taskStore.errors.length === 0) {
+    clearForm()
+  }
+}
+
 const dueDateLocal = computed({
   get() {
     if (!form.value.due_date) return ''
@@ -29,7 +42,7 @@ const dueDateLocal = computed({
 
 <template>
   <SuccessAlert v-if="taskStore.status" :message="taskStore.status" />
-  <form @submit.prevent="taskStore.createTask(form)" class="w-full">
+  <form @submit.prevent="handleTaskCreation" class="w-full">
     <div class="mb-4 py-2">
       <Input id="title" v-model="form.title" type="text" autoFocus placeholder="Enter task title" />
       <FormError :error="taskStore.errors.title" />
