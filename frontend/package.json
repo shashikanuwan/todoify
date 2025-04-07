@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "format": "prettier --write src/"
+    "format": "prettier --write src/",
+    "serve": "vue-cli-service serve --host"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.3",
