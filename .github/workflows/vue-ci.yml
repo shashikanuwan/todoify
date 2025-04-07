@@ -13,13 +13,20 @@ jobs:
       - name: 🚚 Checkout
         uses: actions/checkout@v4
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '22'
+
       - name: Install Dependencies
         run: |
           cd frontend
           npm install
 
       - name: Build project
-        run: npm run build
+        run: |
+          cd frontend
+          npm run build
 
       - name: Code-Fixer
         run: |
