@@ -6,7 +6,7 @@ A clean and modular full-stack Todo application built using **Laravel**, **Vue.j
 
 ## 🧩 Tech Stack
 
-- **Backend:** Laravel 12 (PHP 8.3)
+- **Backend:** Laravel 12 (PHP ^8.2)
 - **Frontend:** Vue 3 (SPA)
 - **Database:** MySQL
 - **Containerization:** Docker + Docker Compose
@@ -24,20 +24,24 @@ A clean and modular full-stack Todo application built using **Laravel**, **Vue.j
 
 1. Clone the Repository
     ```bash
-    git clone git@github.com:shashikanuwan/tickety.git
+    git clone git@github.com:shashikanuwan/todoify.git
     ```
     ```bash
    cd tickety
     ```
 2. Run Docker Compose
     ```bash
-    docker-compose up -d
+    docker compose up --build
     ```
     Then Visit `http://localhost:3000` to start using Todoify.
 
 ### 📝 Testing
 
 1. Test the backend
+    ```bash
+   cd backend
+    ```
+   
     ```bash
     ./vendor/bin/pest
     ```
