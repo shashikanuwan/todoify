@@ -2,8 +2,8 @@
 import { useAuthStore } from '@/stores/auth.js'
 import CardHeader from '@/components/ui/card/CardHeader.vue'
 import Card from '@/components/ui/card/Card.vue'
-import CreateTask from '@/components/task/CreateTask.vue'
-import TaskList from '@/components/task/TaskList.vue'
+import CreateTask from '@/views/task/CreateTask.vue'
+import TaskList from '@/views/task/TaskList.vue'
 import { onMounted } from 'vue'
 
 const authStore = useAuthStore()

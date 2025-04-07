@@ -13,13 +13,13 @@ const router = createRouter({
     {
       path: '/login',
       name: 'login',
-      component: () => import('@/views/LoginView.vue'),
+      component: () => import('@/views/auth/LoginView.vue'),
       meta: { requiresGuest: true },
     },
     {
       path: '/register',
       name: 'register',
-      component: () => import('@/views/RegisterView.vue'),
+      component: () => import('@/views/auth/RegisterView.vue'),
       meta: { requiresGuest: true },
     },
     {
@@ -31,13 +31,13 @@ const router = createRouter({
     {
       path: '/forgot-password',
       name: 'forgot-password',
-      component: () => import('@/views/ForgotPasswordView.vue'),
+      component: () => import('@/views/auth/ForgotPasswordView.vue'),
       meta: { requiresGuest: true },
     },
     {
       path: '/password-reset/:token',
       name: 'password-reset',
-      component: () => import('@/views/ResetPasswordView.vue'),
+      component: () => import('@/views/auth/ResetPasswordView.vue'),
       meta: { requiresGuest: true },
     },
     {
