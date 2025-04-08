@@ -20,7 +20,7 @@ A clean and modular full-stack Todo application built using **Laravel**, **Vue.j
 - Tasks disappear from UI after being marked completed
 - User authentication system
 
-### Docker setup in ubuntu
+### 🔧 Docker setup in ubuntu
 
 #### 👩‍💻 Install using the apt repository
 
@@ -45,7 +45,7 @@ A clean and modular full-stack Todo application built using **Laravel**, **Vue.j
    sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
    ```
 
-### Install docker compose
+#### 👩‍💻 Install docker compose
 
 1. To download and install the Docker Compose CLI plugin, run:
    ```
@@ -55,14 +55,14 @@ A clean and modular full-stack Todo application built using **Laravel**, **Vue.j
    sudo chmod +x /usr/local/bin/docker-compose
    ```
 
-### 🔧 Installation & Setup
+### 🔧 Project Installation & Setup
 
 1. Clone the Repository
     ```bash
     git clone git@github.com:shashikanuwan/todoify.git
     ```
     ```bash
-   cd tickety
+   cd todoify
     ```
 2. Run Docker Compose
     ```bash
