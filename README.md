@@ -44,15 +44,23 @@ A clean and modular full-stack Todo application built using **Laravel**, **Vue.j
    ```
    sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
    ```
+3. ✅ Check if it’s installed properly:
+   ```
+   docker --version
+   ```
 
 #### 👩‍💻 Install docker compose
 
 1. To download and install the Docker Compose CLI plugin, run:
    ```
-   sudo curl -L "https://github.com/docker/compose/releases/download/v2.34.0/docker-compose-linux-x86_64)-$(uname -m)" -o /usr/local/bin/docker-compose
+   sudo curl -L "https://github.com/docker/compose/releases/download/v2.34.0/docker-compose-linux-$(uname -m)" -o /usr/local/bin/docker-compose
    ```
    ```
    sudo chmod +x /usr/local/bin/docker-compose
+   ```
+2. ✅ Check if it’s installed properly:
+   ```
+   docker-compose version
    ```
 
 ### 🔧 Project Installation & Setup
