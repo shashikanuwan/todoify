@@ -19,9 +19,6 @@ WORKDIR /var/www
 # Copy app
 COPY backend/ .
 
-# Composer install
-RUN composer install --no-interaction --prefer-dist --optimize-autoloader
-
 # Copy entrypoint
 COPY backend/docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh

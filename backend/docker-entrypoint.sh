@@ -9,6 +9,15 @@ done
 
 echo "✅ MySQL is ready!"
 
+# Composer install
+composer install --no-interaction --prefer-dist --optimize-autoloader
+
+# Copy .env
+cp .env.example .env
+
+# Generate application key
+php artisan key:generate
+
 # Run migrations and seeds
 php artisan migrate:fresh --seed
 
